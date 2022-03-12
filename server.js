@@ -208,7 +208,7 @@ app.get("/post/:id", (req, res) => {
     blog.getPostByID(req.params.id).then((selected) => {
         res.json(selected);
     }).catch((err) => {
-        res.json({ message: err });
+        res.json({ message: "no results" });
     });
 });
 
