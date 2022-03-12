@@ -7,7 +7,7 @@
             <br /><br />
             {{#safeHTML data.post.body}}{{/safeHTML}}
             <br /><br />
-            <strong>Category:</strong> {{data.post.category}}<br/>
+            <strong>Category:</strong> <a href="/posts?category={{data.post.category}}">{{data.post.category}}</a><br/>
             <strong>Last Updated:</strong> {{data.post.postDate}}
         </article>
 
