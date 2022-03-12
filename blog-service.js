@@ -83,7 +83,7 @@ module.exports.getPostsByMinDate = (minDateStr) => {
         let selected = [];
 
         posts.forEach((i) => {
-            if (new Date(i.postDate) >= new Date(minDateStr)) selected.push(post);
+            if (new Date(i.postDate) >= new Date(minDateStr)) selected.push(i);
         });
 
         if (selected.length > 0)resolve(selected);
