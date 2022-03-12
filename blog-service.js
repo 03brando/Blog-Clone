@@ -49,11 +49,11 @@ module.exports.getCategories = (() => {
 
 module.exports.addPost = (postData) => {
     return new Promise((resolve, reject) => {
-        if (postData.published === undefined){
-            postData.published = false;
+        if (postData.published){
+            postData.published = true;
         }
         else{
-            postData.published === true;
+            postData.published === false;
         }
 
         postData.id = posts.length + 1;
