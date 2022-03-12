@@ -53,7 +53,7 @@ module.exports.addPost = (postData) => {
             postData.published = true;
         }
         else{
-            postData.published === false;
+            postData.published = false;
         }
 
         postData.id = posts.length + 1;
