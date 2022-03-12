@@ -108,8 +108,8 @@ module.exports.getPublishedPostsByCategory = (category) => {
     return new Promise((resolve, reject) => {
         let selected = [];
 
-        posts.forEach((post) => {
-            if (post.category == category && post.published) selected.push(post);
+        posts.forEach((i) => {
+            if (i.category == category && i.published) selected.push(i);
         });
 
         if (selected.length > 0)resolve(selected);
