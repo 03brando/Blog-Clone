@@ -69,8 +69,8 @@ module.exports.getPostsByCategory = (category) => {
     return new Promise((resolve, reject) => {
         let selected = [];
 
-        posts.forEach((post) => {
-            if (post.category == category) selected.push(post);
+        posts.forEach((i) => {
+            if (i.category == category) selected.push(i);
         });
 
         if (selected.length > 0)resolve(selected);
@@ -82,8 +82,8 @@ module.exports.getPostsByMinDate = (minDateStr) => {
     return new Promise((resolve, reject) => {
         let selected = [];
 
-        posts.forEach((post) => {
-            if (new Date(post.postDate) >= new Date(minDateStr)) selected.push(post);
+        posts.forEach((i) => {
+            if (new Date(i.postDate) >= new Date(minDateStr)) selected.push(post);
         });
 
         if (selected.length > 0)resolve(selected);
@@ -93,10 +93,23 @@ module.exports.getPostsByMinDate = (minDateStr) => {
 
 module.exports.getPostByID = (id) => {
     return new Promise((resolve, reject) => {
+        let selected = {};
+
+        posts.forEach((i) => {
+            if (i.id == id) selected = i;
+        });
+
+        if (selected)resolve(selected);
+        else reject("No results returned!")
+    });
+}
+
+module.exports.getPublishedPostsByCategory = (category) => {
+    return new Promise((resolve, reject) => {
         let selected = [];
 
         posts.forEach((post) => {
-            if (post.id == id) selected.push(post);
+            if (post.category == category && post.published) selected.push(post);
         });
 
         if (selected.length > 0)resolve(selected);
