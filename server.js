@@ -227,9 +227,9 @@ app.get('/posts/add', (req, res) => {
     })
 })
 
-app.use(upload.single("featureImage"));
+//app.use(upload.single("featureImage"));
 
-app.post('/posts/add', (req, res) => {
+app.post("/posts/add", upload.single("featureImage"), (req,res) => {
     let streamUpload = (req) => {
         return new Promise((resolve, reject) => {
             let stream = cloudinary.uploader.upload_stream(
