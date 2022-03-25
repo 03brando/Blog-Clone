@@ -212,7 +212,7 @@ app.get("/posts", (req, res) => {
             res.render("posts", { message: "no results" });
         });
     } else {
-        blog.getAllPosts().then((posts) => {
+        blog.getAllPosts().then((selected) => {
             if (selected.length > 0){
                 res.render("posts", {
                     posts: selected
