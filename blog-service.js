@@ -89,7 +89,6 @@ module.exports.getCategories = (() => {
 
 module.exports.addPost = (postData) => {
     return new Promise((resolve, reject) => {
-        postData.published = (postData.published) ? true : false;
         postData.postDate = new Date();
 
         for (const i in postData) {
@@ -101,7 +100,7 @@ module.exports.addPost = (postData) => {
             title: postData.title,
             postDate: postData.postDate,
             featureImage: postData.featureImage,
-            published: postData.published,
+            published: postData.published ? true : false,
             category: postData.category
         }).then((newPost) => {
             resolve(newPost);

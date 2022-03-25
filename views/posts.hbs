@@ -15,11 +15,12 @@
             <tbody>
                 {{#each posts}}
                 <tr>
-                    <td>{{id}}</td>
+                    <td><a href="/blog/{{id}}?category={{../viewingCategory}}">{{id}}</a></td>
                     <td>{{title}}</td>
                     <td>{{#formatDate postDate}}{{/formatDate}}</td>
                     <td><a href="/posts?category={{category}}">{{category}}</a></td>
                     <td>{{published}}</td>
+                    <td><a href="/posts/delete/{{id}}" class="btn btn-danger">Remove</a></td>
                 </tr>
                 {{/each}}
             </tbody>

@@ -1,9 +1,9 @@
 /*********************************************************************************
-*  WEB322 – Assignment 04
+*  WEB322 – Assignment 05
 *  I declare that this assignment is my own work in accordance with Seneca  Academic Policy.  No part *  of this assignment has been copied manually or electronically from any other source 
 *  (including 3rd party web sites) or distributed to other students.
 * 
-*  Name: Brandon Kandola Student ID: 112461165 Date: March 11 2022
+*  Name: Brandon Kandola Student ID: 112461165 Date: March 25 2022
 *
 *  Online (Heroku) URL: https://intense-dusk-29262.herokuapp.com/
 *
@@ -265,36 +265,45 @@ app.get('/posts/add', (req, res) => {
 //app.use(upload.single("featureImage"));
 
 app.post("/posts/add", upload.single("featureImage"), (req,res) => {
-    let streamUpload = (req) => {
-        return new Promise((resolve, reject) => {
-            let stream = cloudinary.uploader.upload_stream(
-                (error, result) => {
-                if (result) {
-                    resolve(result);
-                } else {
-                    reject(error);
-                }
-                }
-            );
+    if (req.file) {
+        let streamUpload = (req) => {
+            return new Promise((resolve, reject) => {
+                let stream = cloudinary.uploader.upload_stream(
+                    (error, result) => {
+                        if (result) {
+                            resolve(result);
+                        } else {
+                            reject(error);
+                        }
+                    }
+                );
+                streamifier.createReadStream(req.file.buffer).pipe(stream);
+            });
+        };
 
-            streamifier.createReadStream(req.file.buffer).pipe(stream);
+        async function upload(req) {
+            let result = await streamUpload(req);
+            console.log(result);
+            return result;
+        };
+
+        upload(req).then((uploaded)=>{
+            req.body.featureImage = uploaded.url;
+            blog.addPost(req.body).then((data) => {
+                res.redirect('/posts')
+            }).catch((error) => {
+                res.status(500).send(error)
+            })
         });
-    };
-    
-    async function upload(req) {
-        let result = await streamUpload(req);
-        console.log(result);
-        return result;
+
+    } else {
+        req.body.featureImage = "";
+            blog.addPost(req.body).then((data) => {
+                res.redirect('/posts')
+            }).catch((error) => {
+                res.status(500).send(error)
+            })
     }
-  
-    upload(req).then((uploaded)=>{
-        req.body.featureImage = uploaded.url;
-        blog.addPost(req.body).then((data) => {
-            res.redirect('/posts')
-        }).catch((error) => {
-            res.status(500).send(error)
-        })
-    });
 })
 
 app.get("/posts/delete/:id", (req, res) => {
