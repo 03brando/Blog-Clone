@@ -1,16 +1,3 @@
-/*********************************************************************************
-*  WEB322 – Assignment 06
-*  I declare that this assignment is my own work in accordance with Seneca  Academic Policy.  No part *  of this assignment has been copied manually or electronically from any other source 
-*  (including 3rd party web sites) or distributed to other students.
-* 
-*  Name: Brandon Kandola Student ID: 112461165 Date: April 10 2022
-*
-*  Online (Heroku) URL: https://intense-dusk-29262.herokuapp.com/
-*
-*  GitHub Repository URL: https://github.com/03brando/web322-app
-*
-********************************************************************************/ 
-
 var express = require("express");
 var app = express();
 const path = require('path')
